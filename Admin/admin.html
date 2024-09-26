@@ -1,0 +1,49 @@
+<div id="password-prompt"></div>
+  <input type="password" id="password-input" placeholder="?????">
+  <button id="enter-button">Enter</button>
+</div>
+
+<script>
+    const enterButton = document.getElementById('enter-button');
+    const passwordInput = document.getElementById('password-input');
+
+    function isAllowedToProceed() {
+      return true;
+    }
+
+    function getCookie(name) {
+      const cookieArr = document.cookie.split('; ');
+      for (let i = 0; i < cookieArr.length; i++) {
+        let cookiePair = cookieArr[i].split('=');
+        if (cookiePair[0] === name) {
+          return decodeURIComponent(cookiePair[1]);
+        }
+      }
+      return null;
+    }
+    
+    let username = getCookie("username");
+    
+    enterButton.addEventListener('click', () => {
+      const enteredPassword = passwordInput.value;
+
+      if (enteredPassword === "A" && username === "CitricOrange" || enteredPassword === "A" && username === "Citric") {
+        redirectToNext();
+      } else {
+          if (enteredPassword === "B" && username === "Dirkum") {
+              redirectToNext();
+          } else {
+          alert("Incorrect password. Please try again.");}
+      };
+
+
+
+    function redirectToNext() {
+      if (isAllowedToProceed()) {
+        document.cookie = "adminAcess=1"
+        window.location.href = "adminPanel.html"; 
+      } else {
+        alert("You are not authorized to access the next page.");
+      }
+    }});
+</script>
